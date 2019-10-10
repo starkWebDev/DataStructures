@@ -1,0 +1,61 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Stack Index</title>
+</head>
+<body>
+    <div> 
+        <!--STACK : LIFO-->
+        <ul>
+            <li>
+                <a href="@Url.Action("AddOne", "Stack")"
+                   class="w3-bar-item w3-button">Add One Item to Stack</a>
+                <!--Use PUSH method to add items to stack-->
+            </li>
+            <li>
+                <a href="@Url.Action("AddMany", "Stack")"
+                   class="w3-bar-item w3-button">Add Huge List of Items to Stack</a>
+                <!--Add huge list-->
+            </li>
+            <li>
+                <a href="@Url.Action("Display", "Stack")"
+                   class="w3-bar-item w3-button">Display Stack</a>
+                <!--try TOSTRING method? Returns a string that represents the current object...-->
+            </li>
+            <li>
+                <a href="@Url.Action("DeleteItem", "Stack")"
+                   class="w3-bar-item w3-button">Delete from Stack</a>
+                <!--use POP method to delete and return element at top of stack-->
+            </li>
+            <li>
+                <a href="@Url.Action("ClearAll", "Stack")"
+                   class="w3-bar-item w3-button">Clear Stack</a>
+                <!--use CLEAR method to remove all elements from stack-->
+            </li>
+            <li>
+                <a href="@Url.Action("Search", "Home")"
+                   class="w3-bar-item w3-button">Search Stack</a>
+                <!--use CONTAINS method-->
+            </li>
+            <li>
+                <a href="@Url.Action("Index", "Home")"
+                   class="w3-bar-item w3-button">Return to Main Menu</a>
+                <!--Route to a REROUTE method in the STACK controller-->
+            </li>
+        </ul>
+    </div>
+
+    @foreach (var sData in ViewBag.OutputStack)
+    {
+        <p>@sData</p>
+    }
+
+</body>
+</html>
