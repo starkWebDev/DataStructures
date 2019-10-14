@@ -98,6 +98,9 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\MainStyle.css" />
     <Content Include="Global.asax" />
+    <Content Include="Graphics\comp.jpeg" />
+    <Content Include="Graphics\comp2.jpg" />
+    <Content Include="Graphics\compScreen.jpeg" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -167,6 +170,8 @@
     <Content Include="Scripts\jquery-3.0.0.slim.min.map" />
     <Content Include="Scripts\jquery-3.0.0.min.map" />
     <Content Include="Views\Dictionary\DisplayDict.cshtml" />
+    <Content Include="Views\Queue\displayQueue.cshtml" />
+    <Content Include="Views\Stack\displayStack.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -176,7 +181,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Graphics\" />
     <Folder Include="Views\Index\" />
   </ItemGroup>
   <ItemGroup>

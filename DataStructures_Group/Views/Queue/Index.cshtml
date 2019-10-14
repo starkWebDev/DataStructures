@@ -23,7 +23,14 @@
 
         <a href="@Url.Action("ClearAll", "Queue")" class="w3-bar-item w3-button">Clear Queue</a>
 
-        <a href="@Url.Action("Search", "Queue")" class="w3-bar-item w3-button">Search Queue</a>
+
+        @using (Html.BeginForm("SearchQueue", "Queue", FormMethod.Post))
+        {
+            <label for="searchQueue" class="sr-only">Search Queue</label>
+            @Html.TextBox("queueGuess")
+            <button type="submit">Search</button> 
+
+        }
 
         <a href="@Url.Action("Index", "Home")" class="w3-bar-item w3-button">Return to Main Menu</a>
 

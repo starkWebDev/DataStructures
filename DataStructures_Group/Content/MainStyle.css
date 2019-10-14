@@ -4,3 +4,13 @@
     margin-right: auto;
     width: 50%;
 }
+
+header {
+    font-family: 'Lucida Console';
+    color: white;
+    background-image: url(../Graphics/comp.jpeg);
+    text-align: center;
+    padding: 0px;
+    height: 400px;
+    
+}

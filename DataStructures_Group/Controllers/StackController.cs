@@ -40,15 +40,16 @@ namespace DataStructures_Group.Controllers
         }
 
         //Display contents of stack using a foreach loop
-        //Handle errors and inform user!
+        //Handle errors and     inform user!
+        //Create a new view for this
         public ActionResult Display()
         {
             foreach (string element in myStack)
             {
-                ViewBag.OutputStack += myStack.ToString();
+                ViewBag.DisplayStack += myStack.ToString();
                 //ViewBag.OutputStack += myStack.Peek();
             }
-            return View("Index");
+            return View("displayStack");
         }
 
         public ActionResult DeleteItem()

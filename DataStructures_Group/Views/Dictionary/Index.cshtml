@@ -16,20 +16,20 @@
 <body>
     <div>
         <!--
-            Create HTML helper form
-            - Make buttons and text boxes (if necessary) for each method
-            - Match names of text boxes to action/method names in the controller
-            - Change the view so it only displays the dictionary when we click "display"
-            - Appropriately link the search
-            - Add the timer to the search (this is what it will return)
-            - Add some Bootstrap to make it look shnazzy! :) -->
-
+        Create HTML helper form
+        - Make buttons and text boxes (if necessary) for each method
+        - Match names of text boxes to action/method names in the controller
+        - Change the view so it only displays the dictionary when we click "display"
+        - Appropriately link the search
+        - Add the timer to the search (this is what it will return)
+        - Add some Bootstrap to make it look shnazzy! :) -->
         @using (Html.BeginForm("SearchDictionary", "Dictionary", FormMethod.Post))
         {
             <label for="searchDict" class="sr-only">Search Dictionary</label>
             @Html.TextBox("dictGuess")
             <button type="submit">Search Dictionary</button>
-        }   
+        }
+
 
         <ul>
             <li>
@@ -63,13 +63,13 @@
                 <!--Route to a REROUTE method in the STACK controller-->
             </li>
         </ul>
-        
+
 
         @foreach (var dictData in ViewBag.OutputDictionary)
         {
             <p>@dictData</p>
         }
-        
+
 
 
 

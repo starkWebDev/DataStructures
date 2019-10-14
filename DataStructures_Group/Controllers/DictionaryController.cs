@@ -47,6 +47,8 @@ namespace DataStructures_Group.Controllers
             }
 
             ViewBag.DisplayDictionary += "</ul>";
+
+            //send to new view
             return View("DisplayDict");
         }
 

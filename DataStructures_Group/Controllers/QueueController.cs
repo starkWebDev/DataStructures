@@ -19,9 +19,7 @@ namespace DataStructures_Group.Controllers
 
         public ActionResult AddOne()
         {
-            int iCount = 1;
-            myQueue.Enqueue("New Entry # " + iCount);
-            iCount++;
+            myQueue.Enqueue("New Entry #" + (myQueue.Count + 1));
             ViewBag.OutputQueue = myQueue;
             return View("Index");
         }
@@ -31,7 +29,7 @@ namespace DataStructures_Group.Controllers
             myQueue.Clear();
             for (int iCount = 0; iCount < 2000; iCount++)
             {
-                myQueue.Enqueue("New Entry # " + myQueue.Count);
+                myQueue.Enqueue("New Entry #" + (myQueue.Count + 1));
             }
             ViewBag.OutputQueue = myQueue;
             return View("Index");
@@ -42,7 +40,7 @@ namespace DataStructures_Group.Controllers
         public ActionResult Display()
         {
             ViewBag.OutputQueue = myQueue;
-            return View("Index");
+            return View("displayQueue");
         }
 
         //fix this--need to dequeue first or last element?
@@ -66,6 +64,34 @@ namespace DataStructures_Group.Controllers
             myQueue.Contains("Yo");
             ViewBag.OutputQueue = myQueue;
             return View("Index");
+        }
+
+        [HttpPost]
+        public string SearchQueue(FormCollection form)
+        {
+            System.Diagnostics.Stopwatch stopWatch = new System.Diagnostics.Stopwatch();
+            stopWatch.Start();
+
+            //retrieve guess from form by ID
+            string guess = form["queueGuess"].ToString();
+            
+            string ans = "";
+            if (myQueue.Contains(guess))
+            {
+                ans = "True";
+            }
+            else
+            {
+                ans = "False";
+            }
+
+            stopWatch.Stop();
+
+            TimeSpan timeSpan = stopWatch.Elapsed;
+
+            string totalTime = ans + " : " + timeSpan;
+
+            return totalTime;
         }
 
     }
