@@ -8,15 +8,34 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
     <title>Dictionary Index</title>
 </head>
 <body>
     <div>
+        <!--
+            Create HTML helper form
+            - Make buttons and text boxes (if necessary) for each method
+            - Match names of text boxes to action/method names in the controller
+            - Change the view so it only displays the dictionary when we click "display"
+            - Appropriately link the search
+            - Add the timer to the search (this is what it will return)
+            - Add some Bootstrap to make it look shnazzy! :) -->
+
+        @using (Html.BeginForm("SearchDictionary", "Dictionary", FormMethod.Post))
+        {
+            <label for="searchDict" class="sr-only">Search Dictionary</label>
+            @Html.TextBox("dictGuess")
+            <button type="submit">Search Dictionary</button>
+        }   
+
         <ul>
             <li>
                 <a href="@Url.Action("AddOne", "Dictionary")"
                    class="w3-bar-item w3-button">Add One Item to Dictionary</a>
-                <!--Use PUSH method to add items to stack-->
+                <!--Use PUSH method to add items to dictionary-->
             </li>
             <li>
                 <a href="@Url.Action("AddMany", "Dictionary")"
@@ -39,16 +58,21 @@
                 <!--use CLEAR method to remove all elements from stack-->
             </li>
             <li>
-                <a href="@Url.Action("Search", "Dictionary")"
-                   class="w3-bar-item w3-button">Search Dictionary</a>
-                <!--use CONTAINS method-->
-            </li>
-            <li>
                 <a href="@Url.Action("Index", "Home")"
                    class="w3-bar-item w3-button">Return to Main Menu</a>
                 <!--Route to a REROUTE method in the STACK controller-->
             </li>
         </ul>
+        
+
+        @foreach (var dictData in ViewBag.OutputDictionary)
+        {
+            <p>@dictData</p>
+        }
+        
+
+
+
     </div>
 </body>
 </html>

@@ -23,9 +23,7 @@ namespace DataStructures_Group.Controllers
         public ActionResult AddOne()
         {
             myStack.Push("New Entry " + (myStack.Count + 1));
-
             ViewBag.OutputStack = myStack;
-
             return View("Index");
         }
         
@@ -33,13 +31,11 @@ namespace DataStructures_Group.Controllers
         public ActionResult AddMany()
         {
             myStack.Clear();
-
             for (int iCount = 0; iCount < 2000; iCount++)
             {
                 myStack.Push("New Entry " + (myStack.Count + 1));
             }
             ViewBag.OutputStack = myStack;
-
             return View("Index");
         }
 
@@ -69,11 +65,31 @@ namespace DataStructures_Group.Controllers
             return View("Index");
         }
 
-        public ActionResult Search()
+        [HttpPost]
+        public String SearchStack(FormCollection form)
         {
-            myStack.Contains("BOB");
-            ViewBag.OutputStack = myStack;
-            return View("Index");
+            System.Diagnostics.Stopwatch stopWatch = new System.Diagnostics.Stopwatch();
+            stopWatch.Start();
+
+            string guess = form["stackGuess"].ToString();
+            string ans;
+            if (myStack.Contains(guess))
+            {
+                ans = "True";
+            }
+            else
+            {
+                ans = "False";
+            }
+
+            stopWatch.Stop();
+
+            TimeSpan timeSpan = stopWatch.Elapsed;
+            string totalTime = ans + " : " + timeSpan;
+
+            return totalTime;
         }
+
+       
     }
 }

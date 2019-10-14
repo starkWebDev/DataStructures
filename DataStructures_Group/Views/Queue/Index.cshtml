@@ -8,10 +8,30 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
     <title>Queue Index</title>
 </head>
 <body>
-    <div> 
+    <div>
+        <a href="@Url.Action("AddOne", "Queue")" class="w3-bar-item w3-button">Add One Item to Queue</a>
+
+        <a href="@Url.Action("AddMany", "Queue")" class="w3-bar-item w3-button">Add Huge List to Queue</a>
+
+        <a href="@Url.Action("Display", "Queue")" class="w3-bar-item w3-button">Display Queue</a>
+
+        <a href="@Url.Action("DeleteItem", "Queue")" class="w3-bar-item w3-button">Delete from Queue</a>
+
+        <a href="@Url.Action("ClearAll", "Queue")" class="w3-bar-item w3-button">Clear Queue</a>
+
+        <a href="@Url.Action("Search", "Queue")" class="w3-bar-item w3-button">Search Queue</a>
+
+        <a href="@Url.Action("Index", "Home")" class="w3-bar-item w3-button">Return to Main Menu</a>
+
+        @foreach (var queueData in ViewBag.OutputQueue)
+        {
+            <p>@queueData</p>
+        }
+
     </div>
 </body>
 </html>

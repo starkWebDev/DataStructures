@@ -16,7 +16,7 @@ namespace DataStructures_Group.Controllers
 
         public ActionResult Exit()
         {
-            return Redirect("http//:www.espn.com");
+            return Redirect("http//:www.byu.edu");
         }
     }
 }
