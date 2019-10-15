@@ -1,78 +1,60 @@
-﻿
-@{
+﻿@{
     Layout = null;
 }
-
 <!DOCTYPE html>
-
+<!--
+Create HTML helper form
+- Make buttons and text boxes (if necessary) for each method
+- Match names of text boxes to action/method names in the controller
+- Change the view so it only displays the dictionary when we click "display"
+- Appropriately link the search
+- Add the timer to the search (this is what it will return)
+- Add some Bootstrap to make it look shnazzy! :)
+-->
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-
     <title>Dictionary Index</title>
+    <style>
+        form {
+            display: inline-flex;
+        }
+    </style>
 </head>
 <body>
-    <div>
-        <!--
-        Create HTML helper form
-        - Make buttons and text boxes (if necessary) for each method
-        - Match names of text boxes to action/method names in the controller
-        - Change the view so it only displays the dictionary when we click "display"
-        - Appropriately link the search
-        - Add the timer to the search (this is what it will return)
-        - Add some Bootstrap to make it look shnazzy! :) -->
+    <div class="w3-sidebar w3-light-grey w3-bar-block" style="width:25%">
+        <!--Dictionary-->
+
+        <h1 style="text-indent: 10px;">Dictionary</h1>
+        <br />
         @using (Html.BeginForm("SearchDictionary", "Dictionary", FormMethod.Post))
         {
-            <label for="searchDict" class="sr-only">Search Dictionary</label>
+            <button type="submit" style="margin-left: 12px;">Search</button>
+            <label for="searchDict" class="sr-only">Search</label>
             @Html.TextBox("dictGuess")
-            <button type="submit">Search Dictionary</button>
         }
-
-
-        <ul>
-            <li>
-                <a href="@Url.Action("AddOne", "Dictionary")"
-                   class="w3-bar-item w3-button">Add One Item to Dictionary</a>
-                <!--Use PUSH method to add items to dictionary-->
-            </li>
-            <li>
-                <a href="@Url.Action("AddMany", "Dictionary")"
-                   class="w3-bar-item w3-button">Add Huge List of Items to Dictionary</a>
-                <!--Add huge list-->
-            </li>
-            <li>
-                <a href="@Url.Action("Display", "Dictionary")"
-                   class="w3-bar-item w3-button">Display Dictionary</a>
-                <!--try TOSTRING method? Returns a string that represents the current object...-->
-            </li>
-            <li>
-                <a href="@Url.Action("DeleteItem", "Dictionary")"
-                   class="w3-bar-item w3-button">Delete from Dictionary</a>
-                <!--use POP method to delete and return element at top of stack-->
-            </li>
-            <li>
-                <a href="@Url.Action("ClearAll", "Dictionary")"
-                   class="w3-bar-item w3-button">Clear Dictionary</a>
-                <!--use CLEAR method to remove all elements from stack-->
-            </li>
-            <li>
-                <a href="@Url.Action("Index", "Home")"
-                   class="w3-bar-item w3-button">Return to Main Menu</a>
-                <!--Route to a REROUTE method in the STACK controller-->
-            </li>
-        </ul>
-
-
-        @foreach (var dictData in ViewBag.OutputDictionary)
-        {
-            <p>@dictData</p>
-        }
-
-
-
-
+        <a href="@Url.Action("AddOne", "Dictionary")" class="w3-bar-item w3-button">Add One Item to Dictionary</a>
+        <a href="@Url.Action("AddMany", "Dictionary")" class="w3-bar-item w3-button">Add Huge List of Items to Dictionary</a>
+        <a href="@Url.Action("Display", "Dictionary")" class="w3-bar-item w3-button">Display Dictionary</a>
+        <a href="@Url.Action("DeleteItem", "Dictionary")" class="w3-bar-item w3-button">Delete from Dictionary</a>
+        <a href="@Url.Action("ClearAll", "Dictionary")" class="w3-bar-item w3-button">Clear Dictionary</a>
+        <br />
+        <a href="@Url.Action("Index", "Home")" class="w3-bar-item w3-button">Return to Main Menu</a>
     </div>
-</body>
-</html>
+    <div style="margin-left:29%">
+        <br />
+        <h3>Current Dictionary:</h3>
+        <br />
+        
+
+                @foreach (var @dictData in ViewBag.OutputDictionary)
+                {
+                    <p>@dictData.Value</p>
+                }
+                    
+            
+        </div>
+    </body>
+    </html>

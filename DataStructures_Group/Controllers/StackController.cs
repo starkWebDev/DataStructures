@@ -19,7 +19,7 @@ namespace DataStructures_Group.Controllers
             return View();
         }
 
-
+        //add one item to stack
         public ActionResult AddOne()
         {
             myStack.Push("New Entry " + (myStack.Count + 1));
@@ -39,26 +39,41 @@ namespace DataStructures_Group.Controllers
             return View("Index");
         }
 
-        //Display contents of stack using a foreach loop
-        //Handle errors and     inform user!
-        //Create a new view for this
+        //display stack, check for errors
         public ActionResult Display()
         {
-            foreach (string element in myStack)
+            if (myStack.Count == 0)
             {
-                ViewBag.DisplayStack += myStack.ToString();
-                //ViewBag.OutputStack += myStack.Peek();
+                Response.Write("<script>alert('The stack is empty.')</script");
+                ViewBag.OutputStack = "";
+                return View("Index");
             }
+            else
+            {
+                ViewBag.OutputStack = myStack;
+            }
+
             return View("displayStack");
         }
 
+        //delete one item from stack
         public ActionResult DeleteItem()
         {
-            myStack.Pop();
+            if (myStack.Count >= 1)
+            {
+                myStack.Pop();
+                ViewBag.OutputStack = myStack;
+            }
+            else
+            {
+                Response.Write("<script>alert('You must add to the stack before you can remove')</script");
+            }
+
             ViewBag.OutputStack = myStack;
             return View("Index");
         }
 
+        //clear stack
         public ActionResult ClearAll()
         {
             myStack.Clear();
@@ -66,6 +81,8 @@ namespace DataStructures_Group.Controllers
             return View("Index");
         }
 
+
+        //search stack and time it
         [HttpPost]
         public String SearchStack(FormCollection form)
         {

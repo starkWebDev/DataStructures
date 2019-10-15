@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     Layout = null;
 }
 
@@ -9,36 +8,43 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <title>Queue Index</title>
+    <style>
+        form {
+            display: inline-flex;
+
+        }
+    </style>
 </head>
 <body>
-    <div>
-        <a href="@Url.Action("AddOne", "Queue")" class="w3-bar-item w3-button">Add One Item to Queue</a>
+    <div class="w3-sidebar w3-light-grey w3-bar-block" style="width:25%">
+        <!--Queue-->
 
-        <a href="@Url.Action("AddMany", "Queue")" class="w3-bar-item w3-button">Add Huge List to Queue</a>
-
-        <a href="@Url.Action("Display", "Queue")" class="w3-bar-item w3-button">Display Queue</a>
-
-        <a href="@Url.Action("DeleteItem", "Queue")" class="w3-bar-item w3-button">Delete from Queue</a>
-
-        <a href="@Url.Action("ClearAll", "Queue")" class="w3-bar-item w3-button">Clear Queue</a>
-
-
+        <h1 style="text-indent: 10px;">Queue</h1>
+        <br />
         @using (Html.BeginForm("SearchQueue", "Queue", FormMethod.Post))
         {
-            <label for="searchQueue" class="sr-only">Search Queue</label>
+            <button type="submit" style="margin-left: 12px;">Search</button>
+            <label for="searchQueue" class="sr-only">Search</label>
             @Html.TextBox("queueGuess")
-            <button type="submit">Search</button> 
-
         }
-
+        <a href="@Url.Action("AddOne", "Queue")" class="w3-bar-item w3-button">Add One Item to Queue</a>
+        <a href="@Url.Action("AddMany", "Queue")" class="w3-bar-item w3-button">Add Huge List of Items to Queue</a>
+        <a href="@Url.Action("Display", "Queue")" class="w3-bar-item w3-button">Display Queue</a>
+        <a href="@Url.Action("DeleteItem", "Queue")" class="w3-bar-item w3-button">Delete from Queue</a>
+        <a href="@Url.Action("ClearAll", "Queue")" class="w3-bar-item w3-button">Clear Queue</a>
+        <br />
         <a href="@Url.Action("Index", "Home")" class="w3-bar-item w3-button">Return to Main Menu</a>
-
-        @foreach (var queueData in ViewBag.OutputQueue)
+    </div>
+    <div style="margin-left:27%">
+        <br />
+        <h3>Current Queue:</h3>
+        <br />
+        @foreach (var sData in ViewBag.OutputQueue)
         {
-            <p>@queueData</p>
+            <p>@sData</p>
         }
-
     </div>
 </body>
 </html>

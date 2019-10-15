@@ -8,6 +8,7 @@ namespace DataStructures_Group.Controllers
 {
     public class QueueController : Controller
     {
+        static Queue<string> myQueue = new Queue<string>();
         // GET: Queue
         public ActionResult Index()
         {
@@ -15,8 +16,7 @@ namespace DataStructures_Group.Controllers
             return View();
         }
 
-        Queue<string> myQueue = new Queue<string>();
-
+        //add one element to queue
         public ActionResult AddOne()
         {
             myQueue.Enqueue("New Entry #" + (myQueue.Count + 1));
@@ -24,6 +24,7 @@ namespace DataStructures_Group.Controllers
             return View("Index");
         }
 
+        //add huge list to queue
         public ActionResult AddMany()
         {
             myQueue.Clear();
@@ -35,46 +36,56 @@ namespace DataStructures_Group.Controllers
             return View("Index");
         }
 
-
-        //perhaps put a modal in the view with the caption "Display Queue" then when you click it, have the view display in a wondrous array of a modal. :)
+        //display queue
         public ActionResult Display()
         {
-            ViewBag.OutputQueue = myQueue;
+            if (myQueue.Count == 0)
+            {
+                Response.Write("<script>alert('The queue is empty.')</script");
+                ViewBag.OutputQueue = "";
+                return View("Index");
+            }
+            else
+            {
+                ViewBag.OutputQueue = myQueue;
+            }
             return View("displayQueue");
         }
 
-        //fix this--need to dequeue first or last element?
+        //delete one item
         public ActionResult DeleteItem()
         {
-            myQueue.Dequeue();
+            if (myQueue.Count >= 1)
+            {
+                myQueue.Dequeue();
+                ViewBag.OutputQueue = myQueue;
+            }
+            else
+            {
+                Response.Write("<script>alert('You must add to the queue before you can remove')</script");
+            }
+
             ViewBag.OutputQueue = myQueue;
             return View("Index");
         }
 
+        //clear queue
         public ActionResult ClearAll()
         {
             myQueue.Clear();
             ViewBag.OutputQueue = myQueue;
             return View("Index");
         }
-
-        //link to HTML helper??
-        public ActionResult Search()
-        {
-            myQueue.Contains("Yo");
-            ViewBag.OutputQueue = myQueue;
-            return View("Index");
-        }
-
+     
+        //search queue
         [HttpPost]
         public string SearchQueue(FormCollection form)
         {
             System.Diagnostics.Stopwatch stopWatch = new System.Diagnostics.Stopwatch();
             stopWatch.Start();
-
             //retrieve guess from form by ID
             string guess = form["queueGuess"].ToString();
-            
+
             string ans = "";
             if (myQueue.Contains(guess))
             {
@@ -84,15 +95,10 @@ namespace DataStructures_Group.Controllers
             {
                 ans = "False";
             }
-
             stopWatch.Stop();
-
             TimeSpan timeSpan = stopWatch.Elapsed;
-
             string totalTime = ans + " : " + timeSpan;
-
             return totalTime;
         }
-
     }
 }

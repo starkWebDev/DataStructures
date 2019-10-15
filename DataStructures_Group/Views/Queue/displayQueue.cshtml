@@ -12,7 +12,10 @@
 </head>
 <body>
     <div>
-        @Html.Raw((string)ViewBag.DisplayQueue)
+        @foreach (var sData in ViewBag.OutputQueue)
+        {
+            <p>@sData</p>
+        }
     </div>
 </body>
 </html>

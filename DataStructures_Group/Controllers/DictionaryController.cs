@@ -9,7 +9,7 @@ namespace DataStructures_Group.Controllers
     public class DictionaryController : Controller
     {
 
-        static Dictionary<string, int> myDictionary = new Dictionary<string, int>();
+        static Dictionary<int, string> myDictionary = new Dictionary<int, string>();
 
         // GET: Dictionary
         public ActionResult Index()
@@ -18,47 +18,65 @@ namespace DataStructures_Group.Controllers
             return View();
         }
 
+        //add one item to dict
         public ActionResult AddOne()
         {
-            myDictionary.Add("New Entry #" + (myDictionary.Count + 1), myDictionary.Count + 1);
+            myDictionary.Add(myDictionary.Count + 1, "New Entry #" + (myDictionary.Count + 1));
             ViewBag.OutputDictionary = myDictionary;
             return View("Index");
         } 
 
+        //add huge list to dict
         public ActionResult AddMany()
         {
             myDictionary.Clear();
             for (int iCount = 0; iCount < 2000; iCount++)
             {
-                myDictionary.Add("New Entry #" + (myDictionary.Count + 1), myDictionary.Count + 1);
+                myDictionary.Add(myDictionary.Count + 1, "New Entry #" + (myDictionary.Count + 1));
             }
             ViewBag.OutputDictionary = myDictionary;
             return View("Index");
         }
 
-        //Remove the ViewBag from the other methods and put the foreach loop in the Index method so the list displays correctly :)
+        //display dictionary
         public ActionResult Display()
         {
-            ViewBag.DisplayDictionary = "<ul>";
-
-            foreach (KeyValuePair<string, int> eachEntry in myDictionary)
+            if (myDictionary.Count == 0)
             {
-                ViewBag.DisplayDictionary += "<li>" + eachEntry.Value + " " + eachEntry.Key + "</li>";
+                Response.Write("<script>alert('The dictionary is empty.')</script");
+                ViewBag.OutputDictionary = "";
+                return View("Index");
             }
-
-            ViewBag.DisplayDictionary += "</ul>";
+            else
+            {
+                foreach (KeyValuePair<int, string> eachEntry in myDictionary)
+                {
+                    ViewBag.OutputDictionary += "<p>" + eachEntry.Value + "</p>";
+                }
+            }
 
             //send to new view
             return View("DisplayDict");
         }
 
+        //delete item from dictionary
         public ActionResult DeleteItem()
         {
-            myDictionary.Remove("New Entry #" + myDictionary.Count);
+            if (myDictionary.Count >= 1)
+            {
+                myDictionary.Remove(myDictionary.Count);
+                ViewBag.OutputDictionary = myDictionary; 
+            }
+            else
+            {
+                Response.Write("<script>alert('You must add to the dictionary before you can remove')</script");
+            }
+
             ViewBag.OutputDictionary = myDictionary;
             return View("Index");
         }
 
+        //clear dict
         public ActionResult ClearAll()
         {
             myDictionary.Clear();
@@ -77,7 +95,7 @@ namespace DataStructures_Group.Controllers
             string guess = form["dictGuess"].ToString();
 
             string ans = "";
-            if (myDictionary.ContainsKey(guess))
+            if (myDictionary.ContainsValue(guess))
             {
                 ans = "True";
             }

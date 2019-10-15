@@ -11,8 +11,11 @@
     <title>displayStack</title>
 </head>
 <body>
-    <div> 
-        @Html.Raw((string)ViewBag.DisplayStack)
+    <div>
+        @foreach (var sData in ViewBag.OutputStack)
+        {
+            <p>@sData</p>
+        }
     </div>
 </body>
 </html>

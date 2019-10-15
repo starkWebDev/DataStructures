@@ -12,5 +12,12 @@ header {
     text-align: center;
     padding: 0px;
     height: 400px;
-    
+}
+
+h1 {
+    font-size: 80px;
+}
+
+li {
+    font-size: 20px;
 }

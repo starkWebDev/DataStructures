@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     Layout = null;
 }
 
@@ -11,41 +10,41 @@
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <title>Stack Index</title>
+    <style>
+        form {
+            display: inline-flex;
+        }
+    </style>
 </head>
 <body>
-    <div class="w3-sidebar w3-light-grey w3-bar-block" style="width:25%"> 
+    <div class="w3-sidebar w3-light-grey w3-bar-block" style="width:25%">
         <!--STACK : LIFO-->
-                
-        
-            
-        <a href="@Url.Action("AddOne", "Stack")" class="w3-bar-item w3-button">Add One Item to Stack</a>
 
-        <a href="@Url.Action("AddMany", "Stack")" class="w3-bar-item w3-button">Add Huge List of Items to Stack</a>
-
-        <a href="@Url.Action("Display", "Stack")" class="w3-bar-item w3-button">Display Stack</a>
-
-        <a href="@Url.Action("DeleteItem", "Stack")" class="w3-bar-item w3-button">Delete from Stack</a>
-
-        <a href="@Url.Action("ClearAll", "Stack")" class="w3-bar-item w3-button">Clear Stack</a>
-
-        <a href="@Url.Action("Index", "Home")" class="w3-bar-item w3-button">Return to Main Menu</a>
-        
+        <h1 style="text-indent: 10px;">Stack</h1>
+        <br />
         @using (Html.BeginForm("SearchStack", "Stack", FormMethod.Post))
         {
-            <label for="searchStack" class="sr-only">Search Stack</label>
+            <button type="submit" style="margin-left: 12px;">Search</button>
+            <label for="searchStack" class="sr-only">Search</label>
             @Html.TextBox("stackGuess")
-            <button type="submit">Search Stack</button>
         }
-
+        <a href="@Url.Action("AddOne", "Stack")" class="w3-bar-item w3-button">Add One Item to Stack</a>
+        <a href="@Url.Action("AddMany", "Stack")" class="w3-bar-item w3-button">Add Huge List of Items to Stack</a>
+        <a href="@Url.Action("Display", "Stack")" class="w3-bar-item w3-button">Display Stack</a>
+        <a href="@Url.Action("DeleteItem", "Stack")" class="w3-bar-item w3-button">Delete from Stack</a>
+        <a href="@Url.Action("ClearAll", "Stack")" class="w3-bar-item w3-button">Clear Stack</a>
+        <br />
+        <a href="@Url.Action("Index", "Home")" class="w3-bar-item w3-button">Return to Main Menu</a>
     </div>
 
-    <div style="margin-left:25%">
+    <div style="margin-left:27%">
+        <br />
+        <h3>Current Stack:</h3>
+        <br />
         @foreach (var sData in ViewBag.OutputStack)
         {
             <p>@sData</p>
         }
     </div>
-   
-
 </body>
 </html>
